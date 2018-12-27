@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header" style="margin:5px">
+            <!-- <img alt="Requests" src="img/icon.png" height="30" width="25"> -->
+        </div>
+        <div class="navbar-header" style="margin:5px">
+            <h4>Requests</h4>
+        </div>
+        <div class="nav navbar-nav navbar-right" style="margin:5px">
+            <a ng-click="loginService.logout()" class="btn btn-default ">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container task-container">
+    <div class="row" ng-if="loadingRequests">
+        <div class="col-md-12 alert text-center alert-info"  role="alert">
+            <span class="glyphicon glyphicon-refresh"></span>
+            <span>Loading Requests ...</span>
+        </div>
+    </div>
+    <!-- <div class="row" ng-if="errorMessage">
+        <div class="col-md-12 alert text-center alert-danger"  role="alert">
+            <span></span>
+        </div>
+    </div> -->
+    
+   
+     <div ng-repeat="req in snowRequests">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#{{$index}}_type" ng-init="row.down=true" ng-click="row.down = !row.down">
+                <span><strong>{{req.number}}</strong></span>
+                <i ng-show="row.down" class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                <i ng-show="!row.down" class="indicator glyphicon glyphicon-chevron-up  pull-right"></i> 
+            </div>
+
+            <div id="{{$index}}_type" class="collapse in">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4">Number</th>
+                            <th class="col-md-4">Short Description</th>
+                            <th class="col-md-4">Created</th>
+                            <th class="col-md-4">Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="req in snowRequests">
+                            <td class="col-md-4 tr-hover">
+                               
+                                   
+                                <a ng-href="#/{{req.number}}/{{$index}}">{{req.number}}</a>
+                            </td>
+                            <td class="col-md-4 ">{{req.short_description}}</td>
+                            <td class="col-md-4 ">{{req.sys_created_on}}</td>
+                            <td class="col-md-4 tr-hover">                                  
+                                <a ng-href="#/{{req.number}}/{{$index}}">Link</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+
+    <!-- if there are no tasks displays an info message -->
+	<div ng-show="!loadingRequests && !errorMessage">
+	    <div class="row" ng-if="tasks|isEmpty">
+	        <div class="col-md-12 alert alert-info text-center " role="alert ">
+	            Nice Job! It looks like you don't have any Requests in your queue
+	        </div>
+	    </div>
+	</div>
+</div>

@@ -1,0 +1,154 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a ng-href="{{referrer}}" class="btn btn-default navbar-btn glyphicon glyphicon-menu-left">
+            </a>
+        </div>
+        <div class="navbar-header" style="margin:5px">
+            <h5>{{details.number}}</h5>
+        </div>
+        <div class="nav navbar-nav navbar-right" style="margin:5px">
+            <a ng-click="loginSvc.logout()" class="btn btn-default">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="text-info" ng-hide="!transactionComplete">
+    Change Request has been created !<br>
+    <a href="#">
+        <input type="button" class="btn btn-primary" style="width: 200px"
+               value="Continue shopping">
+    </a>
+</div>
+<div class="container task-container">
+    <div class="row" ng-if="errorMessage">
+        <div class="col-md-12 alert text-center alert-danger"  role="alert">
+            <span>{{errorMessage}}</span>
+        </div>
+    </div>
+    <div class="row" ng-if="infoMessage">
+        <div class="col-md-12 alert text-center alert-info"  role="alert">
+            <span class="glyphicon glyphicon-refresh"></span>
+            <span>{{infoMessage}}</span>
+        </div>
+    </div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="number">Number</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" disabled id="number" value="{{details.number}}" placeholder="{{details.number}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="opened">Created</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" disabled id="opened" value="{{details.created}}" placeholder="{{details.sys_created_on}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="short_description">Short Description</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" disabled id="short_description" value="{{details.short_desc}}" placeholder="{{details.description}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="short_description">Deplyment Date</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" disabled id="short_description" value="{{deplymentDate}}" placeholder="{{deplymentDate}}">
+            </div>
+        </div>
+        <br/>
+        <h4>Create change Request</h4>
+        <hr/>
+        <!-- <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-7">
+                <textarea class="form-control" ng-model="comment" rows="3"></textarea>
+            </div>
+        </div> -->
+        <!-- content-->
+        <div class="container-fluid">
+            <div class="col-lg-9">
+                <table class="table table-bordered">
+                    <tr class="well">
+                        <td>Service</td>
+                        <td>Version</td>
+                    </tr>
+                    <tr ng-repeat="(service, version) in jsonData">
+                        <td>{{service}}</td>
+                        <td>{{version}}</td>
+                        <!-- <td class="text-center">
+                            <div class="col-sm-2">
+                                <div class="input-group" style="width: 150px;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"
+                                                ng-click="changeQuantityClick(product.name, product.price, 'increase')"
+                                                ng-disabled="product.checkedQuantity == product.quantity">+
+                                        </button>
+                                    </span>
+                                    <input type="text" class="form-control" value="{{product.checkedQuantity}}" readonly
+                                           style="height: 30px">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"
+                                                ng-click="changeQuantityClick(product.name, product.price, 'decrease')"
+                                                ng-disabled="product.checkedQuantity == 0">-
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </td> -->
+                        <!-- <td><input type="button" class="btn btn-primary" value="Remove"
+                                   ng-click="removeFromCartClick(product)"/></td> -->
+                    </tr>
+                    <!-- <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{cart.total | currency}}</td>
+                    </tr> -->
+                </table>
+            </div>
+    
+            <div class="col-sm-pull-3">
+                <a href="#">
+                    <input type="button" class="btn btn-primary" style="width: 200px" ng-click="createChange()"
+                           value="Create Change">
+                </a>
+            </div>
+        </div>
+        <!-- end content-->
+        <!-- <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-7" style="text-align:right">
+                <button class="btn btn-primary" ng-click="create">Create</button>
+            </div>
+        </div> -->
+        <br/>
+        <!-- some users are not allowed to see comments just display an info message to them -->
+        <!-- <div ng-if="status && status!=200">
+            <h4>Comments</h4>
+            <hr/>
+            <div class="alert alert-danger" role="alert">
+                You are not authorized to see comments
+            </div>
+        </div> -->
+        
+        <!-- we get comments from back end only if he is allowed to see them -->
+        <!-- <div ng-if="comments.length>0">
+            <h4>Comments</h4>
+            <hr/>
+            <div ng-repeat="comment in comments">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Created by
+                                <strong>{{comment.sys_created_by}}</strong>    on {{comment.sys_created_on}}</div>
+                            <div class="panel-body">
+                                <p>{{comment.value}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </form>
+</div>
